@@ -1,14 +1,16 @@
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
+import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
 
 const styles = {
-	containerContent: {
+	ContainerContent: {
         backgroundColor: '#ecf0f5',
-        minHeight: '93vh',
-	}
+        minHeight: '88vh',
+    },
+    
 };
 
 declare interface AppProps {
@@ -34,16 +36,17 @@ const headersMenu: Array<HeaderMenu> = [
 
 const App: React.FC<AppProps> = (props) => {
     return (
-        <div className="AppComponent">
+        <>
             <BrowserRouter>
                 <Header headersMenu={headersMenu} />
-                <Container className={props.classes?.containerContent}>
+                <Container className={props.classes?.ContainerContent}>
                     <Switch>
 
                     </Switch>
                 </Container>
+                <Footer version="Version 1.0.0" />
             </BrowserRouter>
-        </div>
+        </>
     )
 }
 
