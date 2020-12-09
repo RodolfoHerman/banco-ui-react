@@ -1,6 +1,7 @@
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import HomeView from '../../views/HomeView';
 import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
@@ -9,6 +10,9 @@ const styles = {
 	ContainerContent: {
         backgroundColor: '#ecf0f5',
         minHeight: '88vh',
+        display: 'flex',
+        alignItems: 'center',
+        alignContent: 'center'
     },
     
 };
@@ -41,7 +45,10 @@ const App: React.FC<AppProps> = (props) => {
                 <Header headersMenu={headersMenu} />
                 <Container className={props.classes?.ContainerContent}>
                     <Switch>
-
+                        <Route exact path="/">
+                            <Redirect to="/home" />
+                        </Route>
+                        <Route exact path="/home" component={HomeView} />
                     </Switch>
                 </Container>
                 <Footer version="Version 1.0.0" />

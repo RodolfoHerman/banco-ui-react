@@ -3,14 +3,14 @@ import React from 'react';
 
 const styles = {
     '@global': {
-		'header.MuiPaper-root': {
+		'header.FooterContainer': {
             height: '50px',
             backgroundColor: '#FFF',
             color: '#222',
             display: 'flex',
             flexDirection: 'unset',
         },
-        'div.MuiContainer-root': {
+        'div.ContainerContent': {
             display: 'flex',
             alignItems: 'center',
             padding: '0px',
@@ -36,8 +36,8 @@ declare interface FooterProps {
 
 const Footer: React.FC<FooterProps> = (props) => {
     return (
-        <AppBar position="static">
-            <Container>
+        <AppBar className="FooterContainer" position="static">
+            <Container className="ContainerContent">
                 <div className="DivContentLeft">
                     <strong>Banco</strong> React Application
                 </div>
