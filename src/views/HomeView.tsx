@@ -1,21 +1,25 @@
-import { Card, CardActions, CardContent, Typography, withStyles } from '@material-ui/core';
+import { Card, CardActions, CardContent, Grid, Typography, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 
-const styles = {
-	CardContent: {
+const styles = () => ({
+	GridContent: {
         width: '80%',
-        minHeight: '200px',
         margin: 'auto',
         textAlign: 'center' as 'center',
         padding: '5%',
-        marginTop: '7%'
+    },
+    CardStyle: {
+        padding: '5%',
+        '& div h1': {
+            marginBottom: '20px'
+        }
     },
     CardActions: {
         display: 'block',
         marginTop: '30px'
     }
-};
+});
 
 declare interface HomeViewProps {
     classes?: {
@@ -25,29 +29,27 @@ declare interface HomeViewProps {
 
 const HomeView: React.FC<HomeViewProps> = (props) => {
     return (
-        <Card className={props.classes?.CardContent}>
-            <CardContent>
-                <Typography component="h1" variant="h2">
-                    {
-                        "Bem vindo ao Banco Inter"
-                    }
-                </Typography>
-                <Typography component="h4" variant="h5">
-                    {
-                        "Gostaria de visualizar alguma conta?"
-                    }
-                </Typography>
-            </CardContent>
-            <CardActions className={props.classes?.CardActions}>
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        size="small"
-                    >
-                        {'Ver contas'}
-                    </Button>
-            </CardActions>
-        </Card>
+        <Grid className={props.classes?.GridContent}>
+            <Card className={props.classes?.CardStyle}>
+                <CardContent>
+                    <Typography component="h1" variant="h2">
+                        Bem vindo ao Banco <strong>Inter</strong>
+                    </Typography>
+                    <Typography component="h4" variant="h5">
+                        Gostaria de visualizar alguma conta?
+                    </Typography>
+                </CardContent>
+                <CardActions className={props.classes?.CardActions}>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            size="large"
+                        >
+                            Ver contas
+                        </Button>
+                </CardActions>
+            </Card>
+        </Grid>
     )
 }
 

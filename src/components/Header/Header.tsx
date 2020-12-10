@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core';
 
-const styles = {
+const styles = () => ({
 	header: {
 		backgroundColor: '#dd4b39',
 		height: '50px',
@@ -31,7 +31,7 @@ const styles = {
 			borderRadius: '10px',
 		}
 	}
-};
+});
 
 export interface HeaderMenu {
 	nome: string,

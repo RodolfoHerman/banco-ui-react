@@ -1,7 +1,7 @@
 import { AppBar, Container, withStyles } from '@material-ui/core';
 import React from 'react';
 
-const styles = {
+const styles = () => ({
     '@global': {
 		'header.FooterContainer': {
             height: '50px',
@@ -25,7 +25,7 @@ const styles = {
             left: '0px'
         }
     }
-}
+});
 
 declare interface FooterProps {
     classes?: {
