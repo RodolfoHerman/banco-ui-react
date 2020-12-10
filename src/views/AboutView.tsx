@@ -23,7 +23,6 @@ const AboutView: React.FC<AboutViewProps> = (props) => {
     return (
         <Grid 
             className={props.classes?.GridStyle}
-            direction="column"
         >
             <Typography component="h2" variant="h3">
                 Sobre

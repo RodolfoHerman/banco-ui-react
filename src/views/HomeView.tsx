@@ -1,6 +1,7 @@
 import { Card, CardActions, CardContent, Grid, Typography, withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = () => ({
 	GridContent: {
@@ -18,6 +19,9 @@ const styles = () => ({
     CardActions: {
         display: 'block',
         marginTop: '30px'
+    },
+    LinkStyle: {
+        textDecoration: 'none'
     }
 });
 
@@ -40,6 +44,10 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions className={props.classes?.CardActions}>
+                    <Link 
+                        to="/contas" 
+                        className={props.classes?.LinkStyle}
+                    >
                         <Button 
                             variant="contained" 
                             color="primary" 
@@ -47,6 +55,7 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
                         >
                             Ver contas
                         </Button>
+                    </Link>
                 </CardActions>
             </Card>
         </Grid>

@@ -1,11 +1,11 @@
 import React from 'react';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core';
 
 const styles = () => ({
-	header: {
+	HeaderStyle: {
 		backgroundColor: '#dd4b39',
 		height: '50px',
 		display: 'flex',
@@ -20,7 +20,7 @@ const styles = () => ({
 			fontWeight: '900',
 		}
 	},
-	linkContent: {
+	LinkStyle: {
 		color: '#FFF',
 		textDecoration: 'none',
 		padding: '10px',
@@ -30,6 +30,10 @@ const styles = () => ({
 			backgroundColor: 'rgba(0, 0, 0, .1)',
 			borderRadius: '10px',
 		}
+	},
+	LinkSelected: {
+		backgroundColor: 'rgba(0, 0, 0, .1)',
+		borderRadius: '10px'
 	}
 });
 
@@ -45,17 +49,31 @@ declare interface HeaderProps {
 	headersMenu: Array<HeaderMenu>
 }
 
+const active = (headerName: string, pathName: string): boolean => {
+	const newPath: string = pathName.slice(1);
+	const newName: string = headerName === "Banco" 
+		? "home"
+		: headerName.toLowerCase();
+
+	return newPath === newName;
+}
+
 const Header: React.FC<HeaderProps> = (props) => {
-	return <header className={props.classes?.header}>
+	const location = useLocation();
+	
+	return <header className={props.classes?.HeaderStyle}>
 		<Container>
 			<Breadcrumbs arial-label="breadcrumb">
 				{
 					props.headersMenu.map(header => {
+						
 						return (
 							<NavLink 
-								className={props.classes?.linkContent}
+								className={props.classes?.LinkStyle}
 								key={header.nome}
 								to={header.link}
+								activeClassName={props.classes?.LinkSelected}
+								isActive={() => active(header.nome, location.pathname)}
 							>
 								{ header.nome }
 							</NavLink>

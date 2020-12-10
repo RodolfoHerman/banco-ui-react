@@ -1,7 +1,11 @@
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { AboutView, HomeView } from '../../views';
+import { 
+    AboutView, 
+    HomeView, 
+    NotFoundView 
+} from '../../views';
 import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
@@ -11,7 +15,6 @@ const styles = () => ({
         backgroundColor: '#ecf0f5',
         minHeight: '88vh',
     },
-    
 });
 
 declare interface AppProps {
@@ -27,7 +30,7 @@ const headersMenu: Array<HeaderMenu> = [
 	},
 	{
 		nome: 'Contas',
-		link: '/'
+		link: '/contas'
 	},
 	{
 		nome: 'Sobre',
@@ -47,6 +50,7 @@ const App: React.FC<AppProps> = (props) => {
                         </Route>
                         <Route exact path="/home" component={HomeView} />
                         <Route exact path="/sobre" component={AboutView} />
+                        <Route component={NotFoundView} />
                     </Switch>
                 </Container>
                 <Footer version="Version 1.0.0" />
