@@ -1,6 +1,7 @@
 import { Container, withStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { getAllContas } from '../../services/Conta.service';
 import { 
     AboutView, 
     HomeView, 
@@ -39,6 +40,15 @@ const headersMenu: Array<HeaderMenu> = [
 ];
 
 const App: React.FC<AppProps> = (props) => {
+    async function fetchContas() {
+        const _contas = await getAllContas();
+        console.log(_contas.data);
+    }
+
+    useEffect(() => {
+        fetchContas();
+    }, [])
+
     return (
         <>
             <BrowserRouter>
