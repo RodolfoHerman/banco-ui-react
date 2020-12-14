@@ -1,15 +1,19 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { Container, withStyles } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { getAllContas } from '../../services/Conta.service';
 import { 
     AboutView, 
+    ContaView, 
     HomeView, 
     NotFoundView 
 } from '../../views';
 import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
+
+library.add(faAddressCard);
 
 const styles = () => ({
 	ContainerContent: {
@@ -40,15 +44,6 @@ const headersMenu: Array<HeaderMenu> = [
 ];
 
 const App: React.FC<AppProps> = (props) => {
-    async function fetchContas() {
-        const _contas = await getAllContas();
-        console.log(_contas.data);
-    }
-
-    useEffect(() => {
-        fetchContas();
-    }, [])
-
     return (
         <>
             <BrowserRouter>
@@ -60,6 +55,7 @@ const App: React.FC<AppProps> = (props) => {
                         </Route>
                         <Route exact path="/home" component={HomeView} />
                         <Route exact path="/sobre" component={AboutView} />
+                        <Route exact path="/contas" component={ContaView} />
                         <Route component={NotFoundView} />
                     </Switch>
                 </Container>
