@@ -50,7 +50,9 @@ declare interface HeaderProps {
 }
 
 const active = (headerName: string, pathName: string): boolean => {
-	const newPath: string = pathName.slice(1);
+	// eslint-disable-next-line
+	const pattern = /\/([^\/]+)/.exec(pathName);
+	const newPath: string = pattern ? pattern[1] : "";
 	const newName: string = headerName === "Banco" 
 		? "home"
 		: headerName.toLowerCase();

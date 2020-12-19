@@ -83,7 +83,7 @@ const ContaList: React.FC<ContaListProps> = (props) => {
                     contas.map(conta => 
                         <Grid key={`conta_corrente_${conta.id}`}  item sm={6} xs={12}>
                             <Paper className={props.classes?.PaperStyle}>
-                                <Link to="/" className={props.classes?.LinkStyle}>
+                                <Link to={`/contas/${conta.id}`} className={props.classes?.LinkStyle}>
                                     <Grid container spacing={2}>
                                         <Grid xs={3} item className={props.classes?.GridImg}>
                                             <img alt="complex" src="/static/media/dinheiro.1dc4fa37.png" />
@@ -113,7 +113,7 @@ const ContaList: React.FC<ContaListProps> = (props) => {
                                             <Grid item>
                                                 <FontAwesomeIcon 
                                                     size="lg" 
-                                                    color="black" 
+                                                    color="#555" 
                                                     icon="address-card" 
                                                     className={props.classes?.AwesomeIcon} 
                                                 />

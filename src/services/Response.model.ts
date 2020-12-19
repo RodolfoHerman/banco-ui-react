@@ -1,6 +1,4 @@
-import { Conta } from "../components/Conta/Conta.model";
-
-export interface ResponseConta {
-    data: Array<Conta>,
+export interface ResponseConta<T> {
+    data: T,
     errors: Array<string>
 }

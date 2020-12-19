@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContaList } from '../components/Conta';
 
-const ContaView = () => {
+const ContaView: React.FC = () => {
     return <ContaList />
 }
 

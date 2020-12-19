@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -9,11 +9,12 @@ import {
     HomeView, 
     NotFoundView 
 } from '../../views';
+import ContaDetail from '../Conta/detail/ContaDetail';
 import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
 
-library.add(faAddressCard);
+library.add(faAddressCard, faCreditCard);
 
 const styles = () => ({
 	ContainerContent: {
@@ -56,6 +57,7 @@ const App: React.FC<AppProps> = (props) => {
                         <Route exact path="/home" component={HomeView} />
                         <Route exact path="/sobre" component={AboutView} />
                         <Route exact path="/contas" component={ContaView} />
+                        <Route exact path="/contas/:id" component={ContaDetail} />
                         <Route component={NotFoundView} />
                     </Switch>
                 </Container>
