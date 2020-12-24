@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getConta } from '../../../services/Conta.service';
 import { setDateBRFormatter, setNumberBRFormatter } from '../../../utils/converter-utils';
 import { Conta } from '../Conta.model';
+import ContaOperation from '../operation/ContaOperation';
 
 const styles = () => ({
     GridContainerContent: {
@@ -15,6 +16,9 @@ const styles = () => ({
         '& > *:not(:last-child)': {
             marginBottom: "15px"
         }
+    },
+    CardHeader: {
+        borderBottom: "1px solid rgb(220,220,220)"
     },
     BoxCabecalho: {
         fontSize: "0.7em",
@@ -54,7 +58,15 @@ declare interface ContaDetailProps {
 }
 
 const ContaDetail: React.FC<ContaDetailProps> = (props) => {
-    const [conta, setConta] = useState<Conta | undefined>(undefined);
+    const initialState: Conta = {
+        id: undefined,
+        saldo: undefined,
+        deposito: undefined,
+        valor: undefined,
+        dataCriacao: undefined,
+        dataAtualizacao: undefined
+    }
+    const [conta, setConta] = useState<Conta>(initialState);
     const { id } = useParams<{id: string | undefined}>();
 
     async function fetchConta() {
@@ -81,9 +93,7 @@ const ContaDetail: React.FC<ContaDetailProps> = (props) => {
             <Grid item xs>
                 <Card elevation={3}>
                     <CardHeader
-                        style={{
-                            borderBottom: "1px solid rgb(220,220,220)"
-                        }}
+                        className={props.classes?.CardHeader}
                         title={
                             <Box 
                                 display="flex"
@@ -119,7 +129,7 @@ const ContaDetail: React.FC<ContaDetailProps> = (props) => {
                             <Grid xs={3} item className={props.classes?.GridImg}>
                                 <img alt="complex" src="/static/media/dinheiro.1dc4fa37.png" />
                             </Grid>
-                            <Grid item xs={9} sm container>
+                            <Grid item xs={9} sm>
                                 <Grid 
                                     item 
                                     xs 
@@ -160,7 +170,7 @@ const ContaDetail: React.FC<ContaDetailProps> = (props) => {
                 </Card>
             </Grid>
             <Grid item xs>
-                {/* COMPONENTE DE OPERATION AQUI */}
+                <ContaOperation conta={conta} />
             </Grid>
         </Grid>
     )

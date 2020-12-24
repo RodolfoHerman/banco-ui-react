@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAddressCard, faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faArrowCircleLeft, faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -14,7 +14,7 @@ import Footer from '../Footer';
 import Header from '../Header';
 import { HeaderMenu } from '../Header';
 
-library.add(faAddressCard, faCreditCard);
+library.add(faAddressCard, faCreditCard, faArrowCircleLeft);
 
 const styles = () => ({
 	ContainerContent: {

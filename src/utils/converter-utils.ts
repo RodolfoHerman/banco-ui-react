@@ -1,4 +1,4 @@
-export const setNumberBRFormatter = (value: number | undefined) => {
+export const setNumberBRFormatter = (value: number | undefined): string => {
     return(
         !!value 
             ? parseFloat(String(value).toString())
@@ -7,7 +7,7 @@ export const setNumberBRFormatter = (value: number | undefined) => {
     );
 }
 
-export const setDateBRFormatter = (value: string | undefined) => {
+export const setDateBRFormatter = (value: string | undefined): string => {
     return(
         !!value
             ? (new Date(value)).toLocaleString().replace(" ", " -- ")
