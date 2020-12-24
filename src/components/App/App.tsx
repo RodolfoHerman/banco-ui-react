@@ -3,16 +3,15 @@ import { faAddressCard, faArrowCircleLeft, faCreditCard } from '@fortawesome/fre
 import { Container, withStyles } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import { 
-    AboutView, 
-    ContaView, 
-    HomeView, 
-    NotFoundView 
+import {
+    AboutView,
+    ContaListView,
+    HomeView,
+    NotFoundView
 } from '../../views';
-import ContaDetail from '../Conta/detail/ContaDetail';
+import ContaView from '../../views/ContaView';
 import Footer from '../Footer';
-import Header from '../Header';
-import { HeaderMenu } from '../Header';
+import Header, { HeaderMenu } from '../Header';
 
 library.add(faAddressCard, faCreditCard, faArrowCircleLeft);
 
@@ -56,8 +55,8 @@ const App: React.FC<AppProps> = (props) => {
                         </Route>
                         <Route exact path="/home" component={HomeView} />
                         <Route exact path="/sobre" component={AboutView} />
-                        <Route exact path="/contas" component={ContaView} />
-                        <Route exact path="/contas/:id" component={ContaDetail} />
+                        <Route exact path="/contas" component={ContaListView} />
+                        <Route exact path="/contas/:id" component={ContaView} />
                         <Route component={NotFoundView} />
                     </Switch>
                 </Container>

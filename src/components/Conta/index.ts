@@ -1,4 +1,4 @@
-import ContaList from './ContaList';
+import ContaList from './list/ContaList';
 
 export {
     ContaList

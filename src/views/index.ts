@@ -1,11 +1,11 @@
 import AboutView from './AboutView';
 import HomeView from './HomeView';
 import NotFoundView from './NotFoundView';
-import ContaView from './ContaView';
+import ContaListView from './ContaListView';
 
 export { 
     AboutView,
     HomeView,
     NotFoundView,
-    ContaView
+    ContaListView
 }

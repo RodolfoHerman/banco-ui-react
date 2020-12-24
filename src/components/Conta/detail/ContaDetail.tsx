@@ -1,22 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Box, Card, CardContent, CardHeader, Grid, Typography, withStyles } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getConta } from '../../../services/Conta.service';
+import React from 'react';
 import { setDateBRFormatter, setNumberBRFormatter } from '../../../utils/converter-utils';
 import { Conta } from '../Conta.model';
-import ContaOperation from '../operation/ContaOperation';
 
 const styles = () => ({
-    GridContainerContent: {
-        width: "90%",
-        position: "relative" as "relative",
-        top: "30px",
-        margin: "auto",
-        '& > *:not(:last-child)': {
-            marginBottom: "15px"
-        }
-    },
     CardHeader: {
         borderBottom: "1px solid rgb(220,220,220)"
     },
@@ -54,125 +42,89 @@ const styles = () => ({
 declare interface ContaDetailProps {
     classes?: {
         [seletor: string]: string
-    }
+    },
+    conta: Conta
 }
 
 const ContaDetail: React.FC<ContaDetailProps> = (props) => {
-    const initialState: Conta = {
-        id: undefined,
-        saldo: undefined,
-        deposito: undefined,
-        valor: undefined,
-        dataCriacao: undefined,
-        dataAtualizacao: undefined
-    }
-    const [conta, setConta] = useState<Conta>(initialState);
-    const { id } = useParams<{id: string | undefined}>();
-
-    async function fetchConta() {
-        const _conta = await getConta(Number(id));
-        setConta(_conta.data);
-    }
-
-    useEffect(() => {
-        fetchConta();
-        const dinheiroImg = require('./../../../assets/img/dinheiro.png');
-        if (typeof window !== 'undefined') {
-            new Image().src = dinheiroImg;
-        }
-    }, []);
-
     return (
-        <Grid
-            container
-            spacing-xs-5="true"
-            align-items-xs-flex-end="true"
-            direction="column"
-            className={props.classes?.GridContainerContent}
-        >
-            <Grid item xs>
-                <Card elevation={3}>
-                    <CardHeader
-                        className={props.classes?.CardHeader}
-                        title={
-                            <Box 
-                                display="flex"
-                                justifyContent="space-between"
-                                flexWrap="wrap"
-                                className={props.classes?.BoxCabecalho}
-                            >
-                                <Box>
-                                    <FontAwesomeIcon
-                                        size="lg"
-                                        icon="credit-card"
-                                        color="#555"
-                                        className={props.classes?.AwesomeIcon}
-                                    />
-                                    Conta corrente
-                                </Box>
-                                <Box>
-                                    <FontAwesomeIcon 
-                                        size="lg" 
-                                        color="#555" 
-                                        icon="address-card" 
-                                        className={props.classes?.AwesomeIcon} 
-                                    />
+        <Card elevation={3}>
+            <CardHeader
+                className={props.classes?.CardHeader}
+                title={
+                    <Box 
+                        display="flex"
+                        justifyContent="space-between"
+                        flexWrap="wrap"
+                        className={props.classes?.BoxCabecalho}
+                    >
+                        <Box>
+                            <FontAwesomeIcon
+                                size="lg"
+                                icon="credit-card"
+                                color="#555"
+                                className={props.classes?.AwesomeIcon}
+                            />
+                            Conta corrente
+                        </Box>
+                        <Box>
+                            <FontAwesomeIcon 
+                                size="lg" 
+                                color="#555" 
+                                icon="address-card" 
+                                className={props.classes?.AwesomeIcon} 
+                            />
+                            {
+                                props.conta?.id
+                            }
+                        </Box>
+                    </Box>
+                }
+            />
+            <CardContent>
+                <Grid container spacing={2}>
+                    <Grid xs={3} item className={props.classes?.GridImg}>
+                        <img alt="complex" src="/static/media/dinheiro.1dc4fa37.png" />
+                    </Grid>
+                    <Grid item xs={9} sm>
+                        <Grid 
+                            item 
+                            xs 
+                            container 
+                            direction="column" 
+                            spacing={5}
+                        >
+                            <Grid item xs className={props.classes?.GridTypography}>
+                                <Typography>
+                                    Saldo
+                                </Typography>
+                                <Typography>
                                     {
-                                        conta?.id
+                                        `R$ ${setNumberBRFormatter(props.conta?.saldo)}`
                                     }
-                                </Box>
-                            </Box>
-                        }
-                    />
-                    <CardContent>
-                        <Grid container spacing={2}>
-                            <Grid xs={3} item className={props.classes?.GridImg}>
-                                <img alt="complex" src="/static/media/dinheiro.1dc4fa37.png" />
-                            </Grid>
-                            <Grid item xs={9} sm>
-                                <Grid 
-                                    item 
-                                    xs 
-                                    container 
-                                    direction="column" 
-                                    spacing={5}
-                                >
-                                    <Grid item xs className={props.classes?.GridTypography}>
-                                        <Typography>
-                                            Saldo
-                                        </Typography>
-                                        <Typography>
-                                            {
-                                                `R$ ${setNumberBRFormatter(conta?.saldo)}`
-                                            }
-                                        </Typography>
-                                        <Typography>
-                                            Data criação
-                                        </Typography>
-                                        <Typography>
-                                            {
-                                                setDateBRFormatter(conta?.dataCriacao)
-                                            }
-                                        </Typography>
-                                        <Typography>
-                                            Data atualização
-                                        </Typography>
-                                        <Typography>
-                                            {
-                                                setDateBRFormatter(conta?.dataAtualizacao)
-                                            }
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
+                                </Typography>
+                                <Typography>
+                                    Data criação
+                                </Typography>
+                                <Typography>
+                                    {
+                                        setDateBRFormatter(props.conta?.dataCriacao)
+                                    }
+                                </Typography>
+                                <Typography>
+                                    Data atualização
+                                </Typography>
+                                <Typography>
+                                    {
+                                        setDateBRFormatter(props.conta?.dataAtualizacao)
+                                    }
+                                </Typography>
                             </Grid>
                         </Grid>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs>
-                <ContaOperation conta={conta} />
-            </Grid>
-        </Grid>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
     )
 }
 

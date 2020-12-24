@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Paper, Typography, withStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllContas } from '../../services/Conta.service';
-import { setNumberBRFormatter } from '../../utils/converter-utils';
-import { Conta } from './Conta.model';
+import { getAllContas } from '../../../services/Conta.service';
+import { setNumberBRFormatter } from '../../../utils/converter-utils';
+import { Conta } from '../Conta.model';
 
 const styles = () => ({
     ContaListaH1: {
@@ -63,7 +63,7 @@ const ContaList: React.FC<ContaListProps> = (props) => {
 
     useEffect(() => {
         fetchContas();
-        const dinheiroImg = require('./../../assets/img/dinheiro.png');
+        const dinheiroImg = require('./../../../assets/img/dinheiro.png');
         if (typeof window !== 'undefined') {
             new Image().src = dinheiroImg;
         }

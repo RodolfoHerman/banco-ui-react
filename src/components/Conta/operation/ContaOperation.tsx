@@ -24,7 +24,7 @@ import {
     hasNoError, 
     isDeposito, 
     setErrors 
-} from '../utils/conta.utils';
+} from '../utils/Conta.utils';
 
 const ERROR_MESSAGE: string = "Campo obrigatório";
 
