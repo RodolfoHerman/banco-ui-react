@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 import { getAllContas } from '../../../services/Conta.service';
 import { setNumberBRFormatter } from '../../../utils/converter-utils';
 import { Conta } from '../Conta.model';
+import { connect } from 'react-redux';
+import { getAllContas  as getAllContasAction } from '../../../redux/Conta/Conta.actions';
+import { showMessage  as showMessageAction } from '../../../redux/Message/Message.actions';
+import { RootState } from '../../../redux';
+import { setTimeout } from 'timers';
 
 const styles = () => ({
     ContaListaH1: {
@@ -50,15 +55,28 @@ const styles = () => ({
 declare interface ContaListProps {
     classes?: {
         [seletor: string]: string
-    }
+    },
+    contas: Array<Conta>,
+    messages: string,
+    getAllContasActionProps: Function,
+    showMessageActionsProps: Function
 }
 
 const ContaList: React.FC<ContaListProps> = (props) => {
-    const [contas, setContas] = useState<Array<Conta>>([]);
+    // const [contas, setContas] = useState<Array<Conta>>([]);
 
     async function fetchContas() {
-        const _contas = await getAllContas();
-        setContas(_contas.data);
+        props.getAllContasActionProps();
+        props.showMessageActionsProps();
+        console.log("ANTES : ", props.messages);
+
+        setTimeout(() => {
+            props.showMessageActionsProps('TESTE');
+            console.log("DEPOIS : ", props.messages);
+        }, 1000);
+
+        // const _contas = await getAllContas();
+        // setContas(_contas.data);
     }
 
     useEffect(() => {
@@ -80,7 +98,7 @@ const ContaList: React.FC<ContaListProps> = (props) => {
                 className={props.classes?.GridStyle}
             >
                 {
-                    contas.map(conta => 
+                    props.contas.map(conta => 
                         <Grid key={`conta_corrente_${conta.id}`}  item sm={6} xs={12}>
                             <Paper className={props.classes?.PaperStyle}>
                                 <Link to={`/contas/${conta.id}`} className={props.classes?.LinkStyle}>
@@ -133,4 +151,14 @@ const ContaList: React.FC<ContaListProps> = (props) => {
     )
 }
 
-export default withStyles(styles)(ContaList);
+const mapStateToProps = (state: RootState) => ({
+    contas: state.contas,
+    messages: state.messages
+});
+
+const mapDispatchToProps = {
+    getAllContasActionProps: () => (getAllContasAction()),
+    showMessageActionsProps: (message: string) => (showMessageAction(message))
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContaList));

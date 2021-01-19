@@ -1,0 +1,1 @@
+export const GET_ALL_CONTAS = "GET_ALL_CONTAS";
